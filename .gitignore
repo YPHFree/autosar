@@ -20,3 +20,6 @@ __pycache__/
 #XSD validation files
 /tests/arxml/expected_gen/*.xsd
 /tests/arxml/expected_gen/*.txt
+
+.vscode
+.idea

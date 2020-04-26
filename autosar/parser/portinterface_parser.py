@@ -201,6 +201,10 @@ class PortInterfacePackageParser(ElementParser):
                         portInterface.applicationErrors.append(applicationError)
                 elif xmlElem.tag == 'SERVICE-KIND':
                     portInterface.serviceKind = self.parseTextNode(xmlElem)
+                elif xmlElem.tag == 'LONG-NAME':
+                    pass
+                elif xmlElem.tag == 'CATEGORY':
+                    pass
                 else:
                     raise NotImplementedError(xmlElem.tag)
             return portInterface
@@ -243,6 +247,12 @@ class PortInterfacePackageParser(ElementParser):
                     isService = True
             elif xmlElem.tag == 'MODE-GROUP':
                 xmlModeGroup = xmlElem
+            elif xmlElem.tag == 'LONG-NAME':
+                pass
+            elif xmlElem.tag == 'DESC':
+                pass
+            elif xmlElem.tag == 'CATEGORY':
+                pass
             else:
                 raise NotImplementedError(xmlElem.tag)
 

@@ -22,6 +22,14 @@ class AdminData:
 
     def __ne__(self, other): return not (self == other)
 
+class SpecialDataXReference(object):
+    def __init__(self, SDX_REF):
+        self.SDX_REF=SDX_REF
+
+class SpecialDataGroupCaption(object):
+    def __init__(self, SDG_CAPTION):
+        self.SDG_CAPTION=SDG_CAPTION
+
 class SpecialDataGroup(object):
     def __init__(self,SDG_GID,SD=None,SD_GID=None):
         self.SDG_GID=SDG_GID

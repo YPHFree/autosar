@@ -1,6 +1,8 @@
 import abc
+import ast
 from collections import deque
-from autosar.base import (AdminData, SpecialDataGroup, SpecialData, SwDataDefPropsConditional, SwPointerTargetProps, SymbolProps)
+from autosar.base import (AdminData, SpecialDataGroup, SpecialData, SwDataDefPropsConditional, SwPointerTargetProps,
+                          SymbolProps, SpecialDataGroupCaption, SpecialDataXReference)
 import autosar.element
 
 def _parseBoolean(value):
@@ -133,10 +135,10 @@ class BaseParser:
         return None if xmlElem is None else xmlElem.text
 
     def parseIntNode(self, xmlElem):
-        return None if xmlElem is None else int(xmlElem.text)
+        return None if xmlElem is None else int(ast.literal_eval(xmlElem.text))
 
     def parseFloatNode(self, xmlElem):
-        return None if xmlElem is None else float(xmlElem.text)
+        return None if xmlElem is None else float(ast.literal_eval(xmlElem.text))
 
     def parseBooleanNode(self, xmlElem):
         return None if xmlElem is None else _parseBoolean(xmlElem.text)
@@ -145,10 +147,10 @@ class BaseParser:
         textValue = self.parseTextNode(xmlElem)
         retval = None
         try:
-            retval = int(textValue)
+            retval = int(ast.literal_eval(textValue))
         except ValueError:
             try:
-                retval = float(textValue)
+                retval = float(ast.literal_eval(textValue))
             except ValueError:
                 retval = textValue
         return retval
@@ -173,6 +175,22 @@ class BaseParser:
                             SD_GID=xmlChild.attrib['GID']
                         except KeyError: pass
                         specialDataGroup.SD.append(SpecialData(TEXT, SD_GID))
+                    elif xmlChild.tag == 'SDG-CAPTION':
+                        SDG_CAPTION = None
+                        try:
+                            SDG_CAPTION = xmlElem
+                        except KeyError:
+                            pass
+                        specialDataGroup.SD.append(SpecialDataGroupCaption(SDG_CAPTION))
+                    elif xmlChild.tag == 'SDX-REF':
+                        SDX_REF = None
+                        try:
+                            SDX_REF = xmlElem
+                        except KeyError:
+                            pass
+                        specialDataGroup.SD.append(SpecialDataXReference(SDX_REF))
+                    elif xmlChild.tag == 'SDG':
+                        pass
                     else:
                         raise NotImplementedError(xmlChild.tag)
                 adminData.specialDataGroups.append(specialDataGroup)
@@ -220,14 +238,14 @@ class BaseParser:
             elif xmlItem.tag == 'ADDITIONAL-NATIVE-TYPE-QUALIFIER':
                 pass #implement later
             elif xmlItem.tag == 'SW-CALPRM-AXIS-SET':
-                print("[BaseParser] unhandled: %s"%xmlItem.tag)
+                print("[BaseParser] unhandled tag: %s"%xmlItem.tag)
                 pass #implement later
-                print("[BaseParser] unhandled: %s"%xmlItem.tag)
+                print("[BaseParser] unhandled tag: %s"%xmlItem.tag)
             elif xmlItem.tag == 'SW-RECORD-LAYOUT-REF':
-                print("[BaseParser] unhandled: %s"%xmlItem.tag)
+                print("[BaseParser] unhandled tag: %s"%xmlItem.tag)
                 pass #implement later
             elif xmlItem.tag == 'INVALID-VALUE':
-                print("[BaseParser] unhandled: %s"%xmlItem.tag)
+                print("[BaseParser] unhandled tag: %s"%xmlItem.tag)
                 pass #implement later
             else:
                 raise NotImplementedError(xmlItem.tag)

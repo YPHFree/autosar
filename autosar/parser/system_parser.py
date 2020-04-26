@@ -34,6 +34,24 @@ class SystemParser(ElementParser):
                     self.parseSystemMapping(xmlElem,system)
                 elif xmlElem.tag=='SOFTWARE-COMPOSITION':
                     self.parseSoftwareComposition(xmlElem,system)
+                elif xmlElem.tag=='CATEGORY':
+                    pass
+                elif xmlElem.tag=='CONTAINER-I-PDU-HEADER-BYTE-ORDER':
+                    pass
+                elif xmlElem.tag=='ECU-EXTRACT-VERSION':
+                    pass
+                elif xmlElem.tag=='FIBEX-ELEMENTS':
+                    pass
+                elif xmlElem.tag=='MAPPINGS':
+                    pass
+                elif xmlElem.tag=='PNC-VECTOR-LENGTH':
+                    pass
+                elif xmlElem.tag == 'PNC-VECTOR-OFFSET':
+                    pass
+                elif xmlElem.tag =='ROOT-SOFTWARE-COMPOSITIONS':
+                    pass
+                elif xmlElem.tag =='SYSTEM-VERSION':
+                    pass
                 else:
                     raise NotImplementedError(xmlElem.tag)
             return system

@@ -81,6 +81,8 @@ class SwcImplementationParser(ElementParser):
                 implementation.useCodeGenerator = self.parseTextNode(xmlElem)
             elif xmlElem.tag == 'VENDOR-ID':
                 implementation.vendorId = self.parseIntNode(xmlElem)
+            elif xmlElem.tag == 'PROGRAMMING-LANGUAGE':
+                pass
             else:
                 self.defaultHandler(xmlElem)
 

@@ -311,6 +311,12 @@ class ComponentTypeParser(ElementParser):
                     elif xmlChild.tag == 'REQUESTER-IREF':
                         requesterComponentRef=self.parseTextNode(xmlChild.find('./CONTEXT-COMPONENT-REF'))
                         requesterPortRef=self.parseTextNode(xmlChild.find('./TARGET-R-PORT-REF'))
+                    elif xmlChild.tag == 'LONG-NAME':
+                        pass
+                    elif xmlChild.tag == 'DESC':
+                        pass
+                    elif xmlChild.tag == 'CATEGORY':
+                        pass
                     else:
                         raise NotImplementedError(xmlChild.tag)
                 if providerComponentRef is None:
